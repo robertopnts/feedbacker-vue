@@ -11,13 +11,18 @@ jobs:
   cypress:
     defaults:
       run:
-        working-directory: dashboard
+        working-directory: ./
 
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
       - run: npm install
 
@@ -33,6 +38,6 @@ jobs:
       - name: Run tests
         uses: cypress-io/github-action@v2
         with:	
-          working-directory: dashboard
+          working-directory: ./
           browser: chrome
           headless: true
