@@ -32,7 +32,7 @@ jobs:
 
       - name: Run project locally
         run: |
-          npm install serve
+          npm run serve
           $(npm bin)/serve dist -s -p 8080 &
 
       - name: Run tests
