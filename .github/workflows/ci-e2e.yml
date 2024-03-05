@@ -14,28 +14,19 @@ jobs:
         working-directory: ./
 
     runs-on: ubuntu-latest
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
 
       - run: npm install
 
       - run: npm run build
         env:
           NODE_ENV: production
-
-      - name: Run project locally
-        run: |
-          npm install serve
-          $(npm bin)/serve dist -s -p 8080 &
         
       - name: Run tests
         uses: cypress-io/github-action@v6
         with:	
           browser: chrome
+          start: npm run serve
+          wait-on: 'http://localhost:8080'
