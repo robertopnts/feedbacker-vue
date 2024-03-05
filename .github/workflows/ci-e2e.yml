@@ -32,9 +32,12 @@ jobs:
 
       - name: Run project locally
         run: |
-          npm run serve
+          npm install serve
           $(npm bin)/serve dist -s -p 8080 &
 
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:8080
+        
       - name: Run tests
         uses: cypress-io/github-action@v2
         with:	
