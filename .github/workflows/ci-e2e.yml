@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v3
@@ -34,13 +34,8 @@ jobs:
         run: |
           npm install serve
           $(npm bin)/serve dist -s -p 8080 &
-
-      - name: Wait for server to be ready
-        run: npx wait-on http://localhost:8080
         
       - name: Run tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:	
-          working-directory: ./
           browser: chrome
-          headless: true
